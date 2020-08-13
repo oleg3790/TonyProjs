@@ -1,85 +1,55 @@
-#include<iostream>
-#include<string>
-#include<cstring>
+/*
+       Program: FaceMask class
+       Programmer: Anthony
+       Date: 8/12/2020
+       Purpose: Demonstrate how to create a simple class and declare objects
+*/
+#include <iostream>
+#include <string>
 using namespace std;
-
-bool checkVin(char[]);
-#define SIZE 30
-#define NUMCHARS 17
-
-int main()
+class FaceMask
 {
-    char vin[SIZE];
-    string getVinInput = "yes";
-
-    cout << "Verify VIN Number Program\n";
-    cout << "The VIN number should be exactly 17 characters long\n";
-    cout << "The VIN number should only contain letters and numerals\n";
-    cout << "The VIN number should indicate the car is manufactured in North America.\n";
-    cout << "The VIN number should be for a car manufactured in 2010 or later.\n";
-
-    while (getVinInput == "yes")
-    {
-        cout << "Enter your VIN number: ";
-        cin.getline(vin, SIZE);
-
-        if (checkVin(vin))
-        {
-            cout << "The VIN number is valid and acceptable\n";
-        }
-        else
-        {
-            cout << "The VIN number was invalid or unacceptable\n";
-        }
-
-        cout << "Do you want to enter another VIN number? (yes or no): ";
-        getline(cin, getVinInput);
-    }
-
-    return 0;
-}
-
-bool checkVin(char vin[])
-{
-    char* p = vin; //pointer to array
-
-    if (strlen(vin) != NUMCHARS)
-    {
-        cout << "VIN number must have " << NUMCHARS << " characters.\n";
-        return false;
-    }
-
-    for (int i = 0; i < NUMCHARS; i++, p++)
-    {
-        if (isalpha(*p))
-        {
-            continue;
-        }
-        else if (isdigit(*p))
-        {
-            continue;
-        }
-        else
-        {
-            cout << "VIN can only contain letters and digits.\n";
-        }
-
-        return false;
-    }
-
-    p = vin; //again pointer initialises to starting position
-
-    if (*p < '1' || *p > '5')
-    {
-        cout << "VIN number should indicate a car manufactured in North America but did not.\n";
-        return false;
-    }
-
-    if (toupper(*(p + 9)) < 'A' || toupper(*(p + 9)) > 'I')
-    {
-        cout << "VIN number should indicate a car manufactured in 2010 or later, but did not.\n";
-        return false;
-    }
-
-    return true;
-}
+	//declaring variables
+private:
+	string description;
+	char size;
+	double price;
+	//functions
+public:
+	FaceMask()
+	{
+		description = "unknown" ;
+		size = 'U' ;
+		price = 0;
+	}
+	FaceMask(string desc, char sz, double cost)
+	{
+		description = desc;
+		size = sz;
+		price = cost;
+	}
+	string getDescription()
+	{
+		return description;
+	}
+	int getSize()
+	{
+		return size;
+	}
+	double getPrice()
+	{
+		return price;
+	}
+	void setDescription(string desc)
+	{
+		description = desc;
+	}
+	void setSize(int sz)
+	{
+		size = sz;
+	}
+	void setPrice(double cost)
+	{
+		price = cost;
+	}
+};
